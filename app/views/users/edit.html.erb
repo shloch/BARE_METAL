@@ -1,0 +1,13 @@
+
+<%= form_for :user, url: {action: "update"}, html: {method: "patch"} do |u| %>
+  <%= label(:user, :Username) %> 
+  <%= u.text_field :username, placeholder: "Mr Bean", value: @user[:username] %>
+
+  <%= label(:user, :Email) %> 
+  <%= u.email_field :email, placeholder: "example@example.com", value: @user[:email] %>
+
+  <%= label(:user, :Password) %> 
+  <%= u.password_field :password, value: @user[:password] %>
+
+  <%= u.submit "Update" %>
+<% end %>
