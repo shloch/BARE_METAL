@@ -1,5 +1,19 @@
 
-<%= form_for :user, url: {action: "update"}, html: {method: "patch"} do |u| %>
+<%= form_for @user, url: {action: "update"}, html: {method: "patch"} do |u| %>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        The form contains <%= pluralize(@user.errors.count, "error") %>.
+      </div>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= label(:user, :Username) %> 
   <%= u.text_field :username, placeholder: "Mr Bean", value: @user[:username] %>
 

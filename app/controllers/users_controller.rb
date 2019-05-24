@@ -21,8 +21,12 @@ class UsersController < ApplicationController
       def update
         #raise params.inspect
         @user = User.find(params[:id])
-        @user.update(user_params)
-        redirect_to "/users/#{params[:id]}/edit"
+        if @user.update(user_params)
+          redirect_to "/users/#{params[:id]}/edit"
+        else  
+          flash[:error] = " #{@user.username}could not be updated. "          
+          render 'edit'
+        end
       end
 
       private
