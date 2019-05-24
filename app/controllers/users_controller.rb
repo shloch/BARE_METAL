@@ -22,9 +22,9 @@ class UsersController < ApplicationController
         #raise params.inspect
         @user = User.find(params[:id])
         if @user.update(user_params)
+          flash[:success] = " #{@user.username} has been updated. "          
           redirect_to "/users/#{params[:id]}/edit"
-        else  
-          flash[:error] = " #{@user.username}could not be updated. "          
+        else         
           render 'edit'
         end
       end
