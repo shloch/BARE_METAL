@@ -1,0 +1,35 @@
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <%= form_for @user, url: {action: "update"}, html: {method: "patch"} do |u| %>
+    <h1>Editing <%= @user[:username] %> </h1>  
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}" %>
+<% end %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <div class="alert alert-danger">
+          The form contains <%= pluralize(@user.errors.count, "error") %>.
+        </div>
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+    <%= label(:user, :Username) %> 
+    <%= u.text_field :username, placeholder: "Mr Bean", value: @user[:username] %><br><br>
+
+    <%= label(:user, :Email) %> 
+    <%= u.email_field :email, placeholder: "example@example.com", value: @user[:email] %><br><br>
+  
+    <%= label(:user, :Password) %> 
+    <%= u.password_field :password, value: @user[:password] %><br><br>
+
+    <%= u.submit "Update" %>
+    <% end %>
+    </div>
+  </div>
